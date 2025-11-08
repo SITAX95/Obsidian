@@ -1,0 +1,175 @@
+/* ===========================================================
+   SNIPPET : toggle-correction.css
+   Version "Pure Motion v11.9 — QuickFlow Edition"
+   -----------------------------------------------------------
+   ✅ Transitions raccourcies mais toujours fluides
+   ✅ Parfaite symétrie ouverture/fermeture
+   ✅ 25% plus rapide (réactivité accrue)
+   =========================================================== */
+
+/* ===========================================================
+   🔹 1. STRUCTURE DU SUMMARY
+   =========================================================== */
+.correction summary {
+  position: relative;
+  display: inline-block;
+  width: 310px;
+  height: 38px;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  background: transparent;
+}
+
+.correction summary .btn-ferme,
+.correction summary .btn-ouvert {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.35s ease-in-out;
+}
+
+/* États logiques */
+.correction summary .btn-ferme { opacity: 1; pointer-events: auto; }
+.correction summary .btn-ouvert { opacity: 0; pointer-events: none; }
+.correction[open] summary .btn-ferme { opacity: 0; pointer-events: none; }
+.correction[open] summary .btn-ouvert { opacity: 1; pointer-events: auto; }
+
+/* ===========================================================
+   🔹 2. STYLE VISUEL DES BOUTONS
+   =========================================================== */
+.correction .btn-ferme,
+.correction .btn-ouvert {
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 600;
+  font-family: 'Neo Sans Std','Noto Sans',sans-serif;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.35s ease;
+  background-clip: padding-box;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.correction .btn-ferme { background: linear-gradient(135deg, #0078D7, #0094FF); }
+.correction .btn-ouvert { background: linear-gradient(135deg,#ff9900,#ffbb33); }
+
+/* ===========================================================
+   🔹 3. ANIMATIONS INTERACTIVES
+   =========================================================== */
+
+/* --- 🖱️ PC : hover fluide et rebond --- */
+@media (hover: hover) and (pointer: fine) {
+  .correction summary span[class^="btn-"] {
+    transition:
+      transform 0.35s cubic-bezier(0.22,1,0.36,1),
+      box-shadow 0.35s ease;
+  }
+
+  .correction summary span[class^="btn-"]:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+  }
+
+  .correction summary span[class^="btn-"]:active {
+    transform: scale(0.97);
+    filter: brightness(1.1);
+  }
+}
+
+/* --- 📱 Mobile : latence plus courte, symétrie conservée --- */
+@media (hover: none) and (pointer: coarse) {
+  .correction summary span[class^="btn-"] {
+    transition:
+      transform 0.35s ease-out,
+      filter 0.35s ease-out,
+      opacity 0.45s ease-in-out;
+  }
+
+  /* Pression tactile instantanée */
+  .correction summary span[class^="btn-"]:active {
+    transform: scale(0.92);
+    filter: brightness(1.25);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  }
+
+  /* ⚙️ Synchronisation raccourcie et équilibrée */
+  /* 💡 → 🙈 */
+  .correction summary .btn-ferme {
+    transition-delay: 0s; /* disparaît direct */
+  }
+  .correction[open] summary .btn-ouvert {
+    transition-delay: 0.25s; /* apparaît plus tôt */
+  }
+
+  /* 🙈 → 💡 */
+  .correction summary .btn-ouvert {
+    transition-delay: 0s; /* fade rapide */
+  }
+  .correction:not([open]) summary .btn-ferme {
+    transition-delay: 0.25s; /* réapparition douce */
+  }
+
+  /* Supprime le focus collant Android */
+  .correction summary:focus,
+  .correction summary:focus-within,
+  .correction summary span:focus {
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    filter: none;
+    transform: none;
+  }
+}
+
+/* ===========================================================
+   🔹 4. PANNEAU DE CORRECTION (fade-in/out)
+   =========================================================== */
+.correction-panel {
+  overflow: hidden;
+  margin-top: 8px;
+  line-height: 1.55;
+  opacity: 0;
+  transform: translateY(-5px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.details-wrap:has(> details[open]) + .correction-panel {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Animation douce du contenu */
+.correction-panel p,
+.correction-panel span {
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.details-wrap:has(> details[open]) + .correction-panel p,
+.details-wrap:has(> details[open]) + .correction-panel span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.correction-panel p:not(:last-child),
+.correction-panel span:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+/* Stabilité du layout */
+.correction-panel {
+  max-height: none !important;
+  will-change: opacity, transform;
+}
+

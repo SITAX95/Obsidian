@@ -4,27 +4,98 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cours 1 – Découverte des réseaux</title>
-
-  <!-- Ton CSS existant -->
   <link rel="stylesheet" href="toggle-correction.css"/>
 
-  <!-- Styles neutres (n'altèrent pas tes boutons) + thème -->
   <style>
     :root {
-      --bg: #f8f9fb; --text:#111; --accent:#0074cc; --highlight:#f9a825; --panel:#ffffff;
+      --bg: #f8f9fb;
+      --text: #111;
+      --accent: #0074cc;
+      --highlight: #f9a825;
+      --panel: #ffffff;
     }
     [data-theme="dark"] {
-      --bg:#0f1117; --text:#fff; --accent:#2196f3; --highlight:#fbc02d; --panel:#1a1c23;
+      --bg: #0f1117;
+      --text: #fff;
+      --accent: #2196f3;
+      --highlight: #fbc02d;
+      --panel: #1a1c23;
     }
-    body { margin: 32px; font-family: "Neo Sans Std", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; transition: background .3s, color .3s; }
-    h1 { color: var(--accent); font-size: 1.9rem; margin: 0 0 .5rem; }
-    h2 .title { color: var(--highlight); font-size: 1.4rem; }
-    .correction-panel { background: var(--panel); color: var(--text); border-radius: 12px; padding: 16px 18px; box-shadow: 0 6px 18px rgba(0,0,0,.15); margin: 10px 0 24px; }
-    .theme-toggle { position: fixed; right: 16px; top: 16px; border: 0; border-radius: 999px; padding: 10px 14px; background: var(--accent); color: #fff; font-weight: 700; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.3); }
-    .theme-toggle:hover { filter: brightness(1.05); }
-    /* Animation douce quand le panneau apparaît */
-    .correction-panel[data-show] { animation: fadeIn .25s ease; }
-    @keyframes fadeIn { from {opacity:0; transform: translateY(-4px);} to {opacity:1; transform: translateY(0);} }
+
+    body {
+      font-family: "Neo Sans Std", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 50px auto;
+      max-width: 900px;
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    h1 {
+      color: var(--accent);
+      font-size: 1.9rem;
+      margin-bottom: 0.4em;
+    }
+
+    h2 .title {
+      color: var(--highlight);
+      font-size: 1.3rem;
+      display: inline-block;
+      margin-bottom: 1em;
+    }
+
+    .details-wrap {
+      margin: 35px 0 15px;
+    }
+
+    details.correction summary {
+      margin-bottom: 8px;
+    }
+
+    .correction-panel {
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 20px 25px;
+      margin: 10px 0 40px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .correction-panel p {
+      margin: 10px 0;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      border: none;
+      border-radius: 25px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      padding: 10px 16px;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--highlight);
+      color: #111;
+      transform: scale(1.05);
+    }
+
+    .correction-panel[data-show] {
+      animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -33,7 +104,6 @@
   <h1><em>Cours 1 - Découverte des réseaux.pdf</em></h1>
   <h2><span class="title">Définitions et Concepts de Base des Réseaux</span></h2>
 
-  <!-- ================== Réseau (structure conservée) ================== -->
   <div class="details-wrap">
     <details class="correction">
       <summary>
@@ -45,10 +115,9 @@
   <div class="correction-panel" style="color:#111;">
     <p><b>Étymologie :</b> Du latin <i>retis</i>, “filet”. Comme une <b style="color:#0074cc;">toile d’araignée</b> : chaque fil représente un <b style="color:#f9a825;">lien de communication</b> entre deux points. Si un point bouge, tout le système réagit.</p>
     <p><b>Définition :</b> Ensemble d’équipements (ordinateurs, serveurs, téléphones…) reliés par des <b style="color:#0074cc;">liens physiques</b> (câbles, fibre optique) ou <b style="color:#0074cc;">sans fil</b> (Wi-Fi, ondes radio), capables de <b style="color:#0074cc;">communiquer</b> et de <b style="color:#0074cc;">partager des ressources</b>.</p>
-    <p><b>Exemple :</b> Chez soi, un ordinateur, un smartphone et une box Internet forment un petit réseau local (LAN).</p>
+    <p><b>Exemple :</b> Chez toi, ton ordinateur, ton smartphone et ta box Internet forment un petit réseau local (LAN).</p>
   </div>
 
-  <!-- ================== Protocole (structure conservée) ================== -->
   <div class="details-wrap">
     <details class="correction">
       <summary>
@@ -58,13 +127,12 @@
     </details>
   </div>
   <div class="correction-panel" style="color:#111;">
-    <p><b>Étymologie :</b> Du grec <i>protos</i> (“premier”) et <i>kollon</i> (“colle”) : à l’origine, la <b>feuille de règles</b> collée au début d’un document officiel.
-      Par analogie, un protocole fixe les <b style="color:#f9a825;">règles à suivre avant d’échanger</b>.</p>
+    <p><b>Étymologie :</b> Du grec <i>protos</i> (“premier”) et <i>kollon</i> (“colle”) : à l’origine, la <b>feuille de règles</b> collée au début d’un document officiel.  
+    Par analogie, un protocole fixe les <b style="color:#f9a825;">règles à suivre avant d’échanger</b>.</p>
     <p><b>Définition :</b> Ensemble de <b style="color:#0074cc;">règles normalisées</b> précisant le <b style="color:#f9a825;">format</b>, la <b style="color:#f9a825;">séquence</b> et la <b style="color:#f9a825;">signification</b> des messages échangés entre deux équipements.</p>
     <p><b>Exemple :</b> Le protocole <b style="color:#0074cc;">HTTP</b> définit comment un navigateur web demande et reçoit une page Internet.</p>
   </div>
 
-  <!-- ========== Communication de données (structure conservée) ========== -->
   <div class="details-wrap">
     <details class="correction">
       <summary>
@@ -74,29 +142,23 @@
     </details>
   </div>
   <div class="correction-panel" style="color:#111;">
-    <p><b>Étymologie :</b> De <i>communicare</i> (“mettre en commun”) et <i>data</i> (“ce qui est donné”).
-      Littéralement : <b style="color:#f9a825;">partager des informations données</b>.</p>
+    <p><b>Étymologie :</b> De <i>communicare</i> (“mettre en commun”) et <i>data</i> (“ce qui est donné”).  
+    Littéralement : <b style="color:#f9a825;">partager des informations données</b>.</p>
     <p><b>Définition :</b> Processus par lequel deux dispositifs échangent des informations via un <b style="color:#0074cc;">support physique</b> (câble, fibre, ondes radio) en suivant un <b style="color:#f9a825;">protocole</b> commun.</p>
-    <p><b>Exemple :</b> Quand un ordinateur envoie un mail à un serveur, il communique des données à travers la fibre Internet.</p>
+    <p><b>Exemple :</b> Quand ton ordinateur envoie un mail à un serveur, il communique des données à travers la fibre Internet.</p>
   </div>
 
-  <!-- ========== JS minimal : n’altère pas ta structure, juste l’affichage ========== -->
   <script>
-    // 1) Lier chaque <details.correction> à son panneau suivant .correction-panel
+    // Lier chaque bouton <details> à son panneau suivant
     document.querySelectorAll('.details-wrap > details.correction').forEach((det) => {
-      // le panneau est le "prochain" sibling de .details-wrap (après </details-wrap>)
       const wrap = det.parentElement;
       const panel = wrap.nextElementSibling;
       if (!panel || !panel.classList.contains('correction-panel')) return;
-
-      // état initial : fermé
       panel.style.display = 'none';
-
-      // quand on ouvre/ferme le <details>, on affiche/masque le panneau lié
       det.addEventListener('toggle', () => {
         if (det.open) {
           panel.style.display = 'block';
-          panel.setAttribute('data-show','');
+          panel.setAttribute('data-show', '');
         } else {
           panel.style.display = 'none';
           panel.removeAttribute('data-show');
@@ -104,13 +166,12 @@
       });
     });
 
-    // 2) Thème clair/sombre avec mémorisation
+    // Gestion du thème clair/sombre
     const root = document.documentElement;
-    const btn  = document.getElementById('themeButton');
+    const btn = document.getElementById('themeButton');
     const saved = localStorage.getItem('theme') || 'light';
     root.setAttribute('data-theme', saved);
     btn.textContent = saved === 'dark' ? '☀️ Thème clair' : '🌙 Thème sombre';
-
     btn.addEventListener('click', () => {
       const cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', cur);

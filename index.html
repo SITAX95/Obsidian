@@ -7,9 +7,9 @@
   <link rel="stylesheet" href="toggle-correction.css">
 
   <style>
-    /* -----------------------------
-       🌗 Thèmes clair et sombre
-    ------------------------------*/
+    /* =======================
+       🌗 Thèmes clair / sombre
+    ======================= */
     :root {
       --bg-color: #f8f9fb;
       --text-color: #111;
@@ -35,10 +35,6 @@
       transition: background 0.4s ease, color 0.4s ease;
     }
 
-    h1, h2 {
-      font-weight: 700;
-    }
-
     h1 {
       color: var(--accent-color);
       font-size: 1.8em;
@@ -47,10 +43,11 @@
     h2 {
       color: var(--highlight-color);
       font-size: 1.4em;
+      margin-bottom: 1rem;
     }
 
     .details-wrap {
-      margin: 16px 0;
+      margin: 20px 0;
     }
 
     .correction-panel {
@@ -58,32 +55,41 @@
       color: var(--text-color);
       border-radius: 10px;
       padding: 15px 20px;
-      margin-top: 8px;
+      margin-top: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.15);
-      transition: background 0.4s ease, color 0.4s ease;
+      transition: all 0.4s ease;
+      animation: fadeIn 0.4s ease;
     }
 
-    /* -----------------------------
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =======================
        🌙 Bouton de thème
-    ------------------------------*/
+    ======================= */
     .theme-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
       background: var(--accent-color);
-      color: white;
+      color: #fff;
       border: none;
-      border-radius: 20px;
-      padding: 8px 16px;
+      border-radius: 30px;
+      padding: 10px 20px;
       cursor: pointer;
       font-weight: bold;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
 
     .theme-toggle:hover {
       background: var(--highlight-color);
       color: #111;
+      transform: scale(1.05);
     }
+
   </style>
 </head>
 
@@ -93,6 +99,9 @@
   <h1><em>Cours 1 - Découverte des réseaux.pdf</em></h1>
   <h2><span class="title">Définitions et Concepts de Base des Réseaux</span></h2>
 
+  <!-- =======================
+       Réseau
+  ======================= -->
   <div class="details-wrap">
     <details class="correction">
       <summary>
@@ -107,6 +116,9 @@
     </details>
   </div>
 
+  <!-- =======================
+       Protocole
+  ======================= -->
   <div class="details-wrap">
     <details class="correction">
       <summary>
@@ -122,6 +134,9 @@
     </details>
   </div>
 
+  <!-- =======================
+       Communication de données
+  ======================= -->
   <div class="details-wrap">
     <details class="correction">
       <summary>
@@ -138,15 +153,22 @@
   </div>
 
   <script>
-    // 🌗 Gestion du bouton de thème
+    // 🌗 Gestion du thème clair/sombre avec stockage local
     const button = document.getElementById("themeButton");
     const root = document.documentElement;
-    let isDark = false;
 
+    // Charge le thème précédent
+    let savedTheme = localStorage.getItem("theme") || "light";
+    root.setAttribute("data-theme", savedTheme);
+    button.textContent = savedTheme === "dark" ? "☀️ Thème clair" : "🌙 Thème sombre";
+
+    // Écoute le clic
     button.addEventListener("click", () => {
-      isDark = !isDark;
-      root.setAttribute("data-theme", isDark ? "dark" : "light");
-      button.textContent = isDark ? "☀️ Thème clair" : "🌙 Thème sombre";
+      const current = root.getAttribute("data-theme");
+      const newTheme = current === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      button.textContent = newTheme === "dark" ? "☀️ Thème clair" : "🌙 Thème sombre";
     });
   </script>
 </body>

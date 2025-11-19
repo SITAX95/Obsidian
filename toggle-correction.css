@@ -244,6 +244,13 @@ h1, h2, .qcm-question {
   will-change: opacity, transform;
 }
 
+/* 🔥 Force le centrage du texte dans les questions */
+body .qcm-question > p {
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+}
+
 
 
 

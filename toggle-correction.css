@@ -415,6 +415,12 @@ h1, h2 {
   }
 }
 
+.correction-panel {
+    color: #111 !important;       /* Texte noir */
+    background: #ffffff !important; /* Fond blanc */
+}
+
+
 /* ========================= */
 /*  BOUTONS VALIDER / RESET  */
 /* ========================= */
@@ -508,4 +514,9 @@ h1, h2 {
   .qcm-question {
     margin: 20px auto;
   }
+}
+
+.correction-panel {
+    color: #111 !important;       /* Texte noir */
+    background: #ffffff !important; /* Fond blanc */
 }

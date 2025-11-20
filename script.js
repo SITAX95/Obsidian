@@ -1,105 +1,71 @@
-/* ===========================================================
-   SCRIPT FINAL — QCM
-   =========================================================== */
+// ================================
+// NAVIGATION LATERALE
+// ================================
+document.querySelectorAll(".nav-question").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const id = btn.dataset.target;
+        const target = document.getElementById(`question-${id}`);
 
-const validateBtn = document.getElementById("validateBtn");
-const resetBtn = document.getElementById("resetBtn");
-const openAllBtn = document.getElementById("openAllBtn");
-const scoreBox = document.getElementById("scoreBox");
+        window.scrollTo({
+            top: target.offsetTop - 20,
+            behavior: "smooth"
+        });
 
-let validated = false;
+        // Highlight the selected navigation button
+        document.querySelectorAll(".nav-question").forEach(x => x.classList.remove("selected"));
+        btn.classList.add("selected");
+    });
+});
 
-/* ============================ */
-/*  LISTE DES BONNES RÉPONSES   */
-/* ============================ */
+// ================================
+// VALIDATION DU QCM
+// ================================
+document.getElementById("validate-btn").onclick = () => {
 
-const answers = {
-    q1: "B",
-    q2: "B",
-    q3: "C",
-    q4: "A",
-    q5: "B",
-    q6: "B",
-    q7: "C",
-    q8: "C",
-    q9: "D",
-    q10:"B",
-    q11:"A",
-    q12:"C",
-    q13:"D",
-    q14:"B",
-    q15:"C",
-    q16:"A",
-    q17:"D",
-    q18:"B",
-    q19:"A",
-    q20:"C",
-    q21:"B",
-    q22:"D",
-    q23:"A",
-    q24:"C",
-    q25:"B",
-    q26:"B",
-    q27:"C",
-    q28:"A",
-    q29:"B",
-    q30:"B"
-};
-
-/* ============================ */
-/*       VALIDATION QCM        */
-/* ============================ */
-
-validateBtn.addEventListener("click", () => {
-    if (validated) return;
-
-    validated = true;
     let score = 0;
 
-    Object.keys(answers).forEach(q => {
-        const correct = answers[q];
-        const inputs = document.querySelectorAll(`input[name="${q}"]`);
-        const explanation = document.querySelector(`#${q} .explanation`);
+    document.querySelectorAll(".qcm-question").forEach(q => {
 
-        inputs.forEach(input => {
-            const parent = input.parentElement;
+        const id = q.dataset.question;
+        const answer = q.querySelector("input:checked");
+        const good = q.querySelector(".correction-panel p b:nth-child(1)").innerText.split(":")[1].trim();
 
-            parent.style.pointerEvents = "none";
+        // Coloration des options
+        q.querySelectorAll("input").forEach(radio => {
+            radio.disabled = true;
 
-            if (input.value === correct) {
-                parent.classList.add("correct");
+            if (radio.value === good) {
+                radio.parentElement.style.color = "lime";
+                radio.parentElement.style.fontWeight = "bold";
             }
 
-            if (input.checked && input.value === correct) {
-                parent.classList.add("selected-correct");
-                score++;
-            }
-
-            if (input.checked && input.value !== correct) {
-                parent.classList.add("wrong");
+            if (answer && radio === answer && answer.value !== good) {
+                radio.parentElement.style.color = "red";
             }
         });
 
-        explanation.style.display = "block";
+        // Score
+        if (answer && answer.value === good) score++;
+
+        // Affichage auto explication
+        q.querySelector(".correction-panel").classList.add("visible");
     });
 
-    scoreBox.textContent = `Score : ${score} / 30`;
-});
+    document.getElementById("score-result").innerHTML = `Score : ${score} / 30`;
+};
 
-/* ============================ */
-/*     RÉINITIALISATION         */
-/* ============================ */
-
-resetBtn.addEventListener("click", () => {
+// ================================
+// RESET COMPLET
+// ================================
+document.getElementById("reset-btn").onclick = () => {
     location.reload();
-});
+};
 
-/* ============================ */
-/*   AFFICHER TOUTES LES EXPL   */
-/* ============================ */
-
-openAllBtn.addEventListener("click", () => {
-    document.querySelectorAll(".explanation").forEach(exp => {
-        exp.style.display = "block";
+// ================================
+// BOUTON "Afficher toutes les explications"
+// ================================
+document.getElementById("toggle-explanations-btn").onclick = () => {
+    document.querySelectorAll(".correction-panel").forEach(panel => {
+        panel.classList.add("visible");
     });
-});
+};

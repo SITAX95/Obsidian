@@ -1,213 +1,212 @@
-/* ================================
-   FOND GLOBAL
-================================ */
+/* ===========================================================
+   VERSION B — Pur Néon + Effets + Sidebar intacte
+   -----------------------------------------------------------
+   ✔ Explications cachées avant validation
+   ✔ Ouvre tout automatiquement après validation
+   ✔ Bouton global "Afficher toutes les explications"
+   ✔ Couleurs réponses à la validation
+   ✔ Verrouillage des boutons après validation
+   =========================================================== */
+
+/* ========================= */
+/*     FOND GLOBAL / TITRES   */
+/* ========================= */
+
 body {
-    background: url("MontagneNuit.jpg") no-repeat center center fixed;
-    background-size: cover;
-    margin: 0;
-    font-family: "Neo Sans Std", sans-serif;
-    color: #fff;
+  background: url("MontagneNuit.jpg") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  font-family: "Neo Sans Std", sans-serif;
+  color: #ffffff;
 }
 
-/* ================================
-   LAYOUT GENERAL
-================================ */
+h1, h2 {
+  text-align: center;
+  text-shadow: 0 0 12px rgba(180,220,255,0.7);
+}
+
+
+/* ========================= */
+/*   LAYOUT GLOBAL / SIDEBAR */
+/* ========================= */
+
 .layout {
-    display: flex;
+  display: flex;
 }
 
-/* ================================
-   SIDEBAR (gauche)
-================================ */
 .sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 230px;
+  width: 230px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
 
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  padding: 20px;
 
-    padding: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
-
-    overflow-y: auto;
-    z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .sidebar-title {
-    font-weight: bold;
-    font-size: 22px;
-    text-align: center;
-    margin-bottom: 15px;
-    text-shadow: 0 0 10px rgba(0,150,255,0.7);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 10px;
 }
 
-/* Score */
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-question {
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: rgba(0, 150, 255, 0.35);
+  color: white;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.nav-question:hover {
+  background: rgba(0, 170, 255, 0.55);
+}
+
+
+/* Score dans la sidebar */
 .score-result {
-    background: rgba(0,0,0,0.65);
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 20px;
-    box-shadow: 0 0 10px rgba(0,150,255,0.6);
+  background: rgba(0,0,0,0.75);
+  padding: 12px;
+  text-align: center;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(0,200,255,0.55);
 }
 
-/* Bouton "Afficher toutes les explications" */
-.toggle-explanations-btn {
-    width: 100%;
-    padding: 10px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
 
-    background: linear-gradient(135deg, #0094FF, #00C3FF);
-    color: #fff;
+/* ========================= */
+/*      CONTENU PRINCIPAL    */
+/* ========================= */
 
-    box-shadow: 0 0 15px rgba(0,180,255,0.6);
-    transition: 0.3s;
-}
-
-.toggle-explanations-btn:hover {
-    transform: translateY(-3px);
-}
-
-/* Liste des Q1-Q30 */
-.sidebar-list button {
-    width: 100%;
-    padding: 8px 0;
-    margin: 5px 0;
-
-    background: rgba(255,255,255,0.1);
-    border: none;
-    border-radius: 8px;
-
-    cursor: pointer;
-    color: #fff;
-    font-weight: 600;
-
-    transition: 0.3s;
-}
-
-.sidebar-list button.selected {
-    background: rgba(0,200,255,0.4);
-    box-shadow: 0 0 10px rgba(0,200,255,0.8);
-}
-
-/* ================================
-   BOUTON BURGER (mobile)
-================================ */
-.sidebar-toggle {
-    display: none;
-}
-
-/* ================================
-   CONTENU (droite)
-================================ */
 .main-content {
-    margin-left: 260px;
-    padding: 30px 40px;
+  margin-left: 260px;
+  padding: 30px;
+  max-width: 900px;
 }
 
-h1 {
-    text-align: center;
-    text-shadow: 0 0 12px rgba(180,220,255,0.7);
-}
 
-/* ================================
-   QUESTIONS
-================================ */
+/* ========================= */
+/*      QCM QUESTIONS        */
+/* ========================= */
+
 .qcm-question {
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(6px);
-
-    padding: 20px;
-    border-radius: 20px;
-
-    margin: 30px auto;
-    max-width: 800px;
-
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  padding: 25px;
+  margin: 30px 0;
+  border-radius: 18px;
+  box-shadow: 0 0 14px rgba(0,0,0,0.45);
 }
 
-/* Options */
 .qcm-options label {
-    display: block;
-    margin: 8px 0;
-    cursor: pointer;
+  display: block;
+  margin: 6px 0;
+  cursor: pointer;
 }
 
-.qcm-options input:disabled {
-    cursor: not-allowed;
+
+/* ========================= */
+/*      DETAILS PURE MOTION  */
+/* ========================= */
+
+.details-wrap details {
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* ================================
-   PANNEAU EXPLICATION
-================================ */
+.explanation-visible details {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* ========================= */
+/*   PANNEAU EXPLICATION     */
+/* ========================= */
+
 .correction-panel {
-    background: rgba(255,255,255,0.9);
-    color: #111;
-    padding: 15px;
+  background: rgba(255,255,255,0.88);
+  color: #111;
+  padding: 20px;
+  border-radius: 14px;
+  margin-top: 12px;
+  display: none;
 
-    border-radius: 12px;
-    margin-top: 10px;
-
-    display: none;
-
-    box-shadow: 0 0 12px rgba(255,255,255,0.6);
+  box-shadow: 0 0 16px rgba(255,255,255,0.4);
 }
 
 .correction-panel.visible {
-    display: block;
-    animation: fadeIn 0.3s ease;
+  display: block;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
+
+/* ========================= */
+/*   COLORATION DES REPONSES */
+/* ========================= */
+
+.correct {
+  background: rgba(0,255,120,0.25);
+  border-radius: 10px;
+  padding: 3px;
 }
 
-/* Boutons explication */
-.correction summary {
-    cursor: pointer;
-    user-select: none;
+.wrong {
+  background: rgba(255,60,60,0.25);
+  border-radius: 10px;
+  padding: 3px;
 }
 
-.btn-ferme, .btn-ouvert {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 12px;
-    font-weight: bold;
-
-    background: linear-gradient(135deg, #0094FF, #00C3FF);
-    box-shadow: 0 0 14px rgba(0,180,255,0.7);
+.locked {
+  pointer-events: none;
+  opacity: 0.55;
 }
 
-/* ================================
-   VALIDATION / RESET
-================================ */
-.validate-btn, .reset-btn {
-    border: none;
-    border-radius: 30px;
-    padding: 12px 22px;
-    margin: 20px 10px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
+
+/* ========================= */
+/*   BOUTONS VALIDATION      */
+/* ========================= */
+
+.qcm-actions {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.validate-btn,
+.reset-btn {
+  padding: 12px 30px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
 }
 
 .validate-btn {
-    background: linear-gradient(135deg, #00ff6a, #00c853);
-    color: #111;
-    box-shadow: 0 0 14px rgba(0,255,150,0.6);
+  background: linear-gradient(135deg, #00ff6a, #00c853);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0,255,120,0.5);
 }
 
 .reset-btn {
-    background: linear-gradient(135deg, #ff6b6b, #ff8787);
-    color: white;
-    box-shadow: 0 0 14px rgba(255,80,80,0.6);
+  background: linear-gradient(135deg, #ff6b6b, #ff8787);
+  color: #fff;
+  box-shadow: 0 0 18px rgba(255,70,70,0.55);
 }
